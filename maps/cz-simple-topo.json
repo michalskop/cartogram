@@ -1,0 +1,1 @@
+{"type":"Topology","bbox":[12.0921,48.55183,18.8589,51.0547],"objects":{"tracts":{"type":"GeometryCollection","geometries":[{"type":"Polygon","arcs":[[0]],"properties":{"CNTR_ID":"CZ","CNTR_NAME":"Česká Republika","NAME_ENGL":"Czechia","ISO3_CODE":"CZE","FID":"CZ"}}]}},"arcs":[[[14.82336,50.87055],[18.83825,49.52339],[14.06896,48.59753],[14.82336,50.87055]]]}
