@@ -51,7 +51,7 @@ fig.show()
 
 
 # centre and rescale
-n = 200
+n = 20
 scale = 1 / (math.sqrt(area) / math.sqrt(n))
 xs = []
 ys = []
