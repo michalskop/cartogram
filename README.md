@@ -1,6 +1,8 @@
 # The Cartogram
 
-![Cartogram](images/cz_hexagons_200_example.png)
+![Cartogram](images/cz_kraje_20000.png)
+
+![Cartogram](images/sk_kraje_50000.png)
 
 Notes:
 
