@@ -1,5 +1,5 @@
 """Trials with V7 cartogram."""
-# simplified: no multiparts, no enclaves!!!
+# simplified:no enclaves!!!
 
 import json
 import math
@@ -82,18 +82,18 @@ colors = {
     'UA': 'yellow'
 }
 colors = {
-    'CZ020': '#e9ecef',
+    'CZ020': '#b4e3bb',
     'CZ031': '#138496',
     'CZ032': '#E95420',
     'CZ041': '#ecaa1b',
     'CZ042': '#abdde5',
     'CZ051': '#f3b2ae',
-    'CZ052': '#2f973e',
+    'CZ052': '#dcd9d6',
     'CZ053': '#f7bdaa',
     'CZ063': '#c7291e',
     'CZ064': '#772953',
     'CZ071': '#cfb3c3',
-    'CZ072': '#dcd9d6',
+    'CZ072': '#2f973e',
     'CZ080': '#9c948a'
 }
 
@@ -222,6 +222,20 @@ for country_id in countries:
     countries[country_id]['center'] = affinity.scale(raw_center, xfact=countries[country_id]['scale'], yfact=countries[country_id]['scale'], origin=bpoint)
     countries[country_id]['multipolygon'] = affinity.scale(raw_multipolygon, xfact=countries[country_id]['scale'], yfact=countries[country_id]['scale'], origin=bpoint)
 
+    # manually:
+    manually = {
+        'CZ020': [0.35, 0],
+        'CZ042': [-.5, .5],
+        'CZ051': [0, 0.5],
+        # 'CZ032': [-1, 0],
+        'CZ064': [-.35, .35]
+    }
+    for m in manually:
+        if country_id == m:
+            arr = manually[m]
+            countries[country_id]['center'] = affinity.translate(countries[country_id]['center'], xoff=arr[0], yoff=arr[1])
+            countries[country_id]['multipolygon'] = affinity.translate(countries[country_id]['multipolygon'], xoff=arr[0], yoff=arr[1])
+
 fig = go.Figure()
 for country_id in countries:
     for polygon in countries[country_id]['multipolygon']:
@@ -324,7 +338,7 @@ for country_id in countries:
             type="path",
             path=pth,
             fillcolor=colors[country_id],
-            opacity=0.5,
+            opacity=0.75,
             line=dict(
                 color=colors[country_id],
                 width=2,
@@ -338,20 +352,20 @@ fig.add_trace(go.Scatter(
     textposition="middle center"
 ))
 fig.update_layout(
-    paper_bgcolor='rgba(0,0,0,0)',
+    # paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
     autosize=False,
-    width=1200,
-    height=700,
-    xaxis_showgrid=False,
-    yaxis_showgrid=False,
-    xaxis=dict(showgrid=False, zeroline=False),
-    yaxis=dict(showgrid=False, zeroline=False),
+    width=900,
+    height=550,
+    # xaxis_showgrid=False,
+    # yaxis_showgrid=False,
+    # xaxis=dict(showgrid=False, zeroline=False),
+    # yaxis=dict(showgrid=False, zeroline=False),
 )
-fig.update_xaxes(showticklabels=False)
-fig.update_yaxes(showticklabels=False)
+# fig.update_xaxes(showticklabels=False)
+# fig.update_yaxes(showticklabels=False)
 fig.show()
-fig.write_image(path + "images/cz_kraje_50000.png")
+fig.write_image(path + "images/cz_kraje_50000_x.png")
 
 #
 #
@@ -361,5 +375,8 @@ fig.write_image(path + "images/cz_kraje_50000.png")
 #
 #
 # list(countries['DE']['raw_multipolygon'][0].exterior.coords)
-# x, y = countries['DE']['multipolygon'][0].exterior.coords.xy
+x, y = countries3857['CZ020']['multipolygon'][0].exterior.coords.xy
+
+country = countries['CZ080']
+country['multipolygon'].centroid.xy
 # list(countries['DE']['center'].coords)
